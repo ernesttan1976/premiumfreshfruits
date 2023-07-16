@@ -1,18 +1,9 @@
+"use client"
 import './globals.css'
 import { Link } from '@chakra-ui/next-js'
 
-import { ChakraProvider, extendTheme  } from '@chakra-ui/react'
-import { CacheProvider } from '@chakra-ui/next-js'
+import { Providers } from "./providers";
 import { Flex,Text } from '@chakra-ui/react'
-
-const colors = {
-  brand: {
-    900: '#1a365d',
-    800: '#153e75',
-    700: '#2a69ac',
-  },
-}
-export const theme = extendTheme({ colors })
 
 export const metadata = {
   title: 'Premium Fresh Fruits',
@@ -23,8 +14,7 @@ export default function RootLayout({ children }) {
   return (
       <html lang="en">
         <body>
-        <CacheProvider>
-          <ChakraProvider theme={theme}>
+          <Providers>
           <Flex p={2} direction="column" width="100vw" height="100%" align="center" justify="flex-start">
           <header>
             <Flex direction="column" width="100vw" height="80px" align="center" justify="space-apart">
@@ -44,8 +34,7 @@ export default function RootLayout({ children }) {
           </main>
           <footer>Premium Fresh Fruits &copy; 2023 </footer>
           </Flex>
-          </ChakraProvider>
-          </CacheProvider>
+          </Providers>
         </body>
       </html>
   )
