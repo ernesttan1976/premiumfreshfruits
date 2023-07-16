@@ -8,6 +8,11 @@ import { useRouter } from 'next/navigation'
 
 import dayjs from "dayjs"
 
+// export const metadata = {
+//   title: 'Premium Fresh Fruits',
+//   description: 'Point of Sale Application',
+// }
+
 export default function Home() {
 
   const [products, setProducts] = useState([])

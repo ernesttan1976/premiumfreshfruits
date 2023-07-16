@@ -5,11 +5,6 @@ import { Link } from '@chakra-ui/next-js'
 import { Providers } from "./providers";
 import { Flex,Text } from '@chakra-ui/react'
 
-export const metadata = {
-  title: 'Premium Fresh Fruits',
-  description: 'Point of Sale Application',
-}
-
 export default function RootLayout({ children }) {
   return (
       <html lang="en">
