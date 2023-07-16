@@ -1,6 +1,4 @@
-"use client"
 import './globals.css'
-// import Link from 'next/link'
 import { Link } from '@chakra-ui/next-js'
 
 import { ChakraProvider, extendTheme  } from '@chakra-ui/react'
