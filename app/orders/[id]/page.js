@@ -16,7 +16,14 @@ export default function OrderShow({ params }) {
     const loadOrder = async () => {
 
       const id = params.id
-      const result = await fetch("/api/orders/" + id)
+      const result = await fetch("/api/orders/" + id,
+        {
+          method: "GET",
+          headers: {
+            'Cache-Control': 'max-age=60',
+          },
+        }
+      )
       //console.log(data)
       if (result.ok === true) {
         const data = await result.json()
