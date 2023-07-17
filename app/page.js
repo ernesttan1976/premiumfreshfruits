@@ -102,7 +102,7 @@ export default function Home({children}) {
   
         setTimeout(() => {
           router.push("/orders/"+id)
-        }, 3000);
+        }, 500);
 
         setCartItems([])
         setLoading2(false)
