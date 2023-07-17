@@ -19,9 +19,9 @@ export default function Orders() {
 
       const result = await fetch("/api/orders")
       
-      //console.log(data)
       if (result.ok === true) {
         const data = await result.json()
+        console.info(data)
         setOrders(data)
       } else {
         console.log("Error in GET: /api/orders")
