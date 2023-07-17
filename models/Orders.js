@@ -39,6 +39,17 @@ if (!mongoose.models.Order){
     }
   );
 
+  
+  ordersSchema.pre("find", function (next) {
+    this.populate("lines.product");
+    next();
+  });
+
+  ordersSchema.pre("findOne", function (next) {
+    this.populate("lines.product");
+    next();
+  });
+
   ordersSchema.virtual("total").get(function () {
     let total = 0
     this.lines.forEach((line) => {
