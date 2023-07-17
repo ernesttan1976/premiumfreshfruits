@@ -7,7 +7,7 @@ export async function GET(request, response) {
   connect();
 
   try {
-    const products = await Product.find({})
+    const products = await Product.find({}).exec()
     //.sort({ 'createdAt': 'desc' })
     return NextResponse.json(products);
   } catch (err) {

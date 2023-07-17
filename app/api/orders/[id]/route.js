@@ -33,10 +33,10 @@ export async function DELETE(request, {params}) {
   const id = params.id
   
   try {
-    const order = await Order.findById(id)
+    const order = await Order.findById(id).exec()
     console.info(order)
 
-    if (order) order.deleteOne()
+    if (order) await order.deleteOne().exec()
     
     return NextResponse.json(order);
   } catch (err) {
