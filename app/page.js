@@ -73,7 +73,10 @@ export default function Home({children}) {
   }
 
   function handleReload(){
-    setToggleReload(!toggleReload)
+    setTimeout(() => {
+      setToggleReload(!toggleReload)
+    }, 500);
+    
   }
 
   const handlePlaceOrder = async (ev) => {
