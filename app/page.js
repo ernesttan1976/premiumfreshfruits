@@ -64,6 +64,10 @@ export default function Home({children}) {
   //   console.log(cartItems)
   // };
 
+  function handleReload(){
+    setToggleReload(!toggleReload)
+  }
+
   const handlePlaceOrder = async (ev) => {
     ev.preventDefault()
     //console.log(cartItems)
@@ -81,10 +85,11 @@ export default function Home({children}) {
       if (result.ok) {
         const data = await result.json()
         const id = data._id
-        router.push("/orders/"+id)
   
         setCartItems([])
         setToggleReload(!toggleReload)  
+        router.push("/orders/"+id)
+
       } else {
         console.log("Error in POST: /api/orders "+JSON.stringify(result))
       }
@@ -135,6 +140,7 @@ export default function Home({children}) {
                       </Td>
                     </Tr>
                   })}
+                  <Tr><Td colSpan={4} textAlign="center"><Button size="md" onClick={(ev) => handleReload(ev)}>Reload Data</Button></Td></Tr>
                 </Tbody>
               </Table>
             </>
