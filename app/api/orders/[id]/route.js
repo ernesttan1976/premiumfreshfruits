@@ -9,10 +9,10 @@ export async function GET(request, {params}) {
   const id = params.id
   
   try {
-    const order = await Order.findById(id).select('date lines total').populate({
+    const order = await Order.findById(id).populate({
       path: "lines.product",
       select: "name unitPrice"
-    }).exec()
+    }).select('date lines total')
     console.info(order)
     
     return NextResponse.json(order);
