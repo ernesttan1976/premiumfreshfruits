@@ -13,15 +13,15 @@ if (!mongoose.models.Order){
     },
   )
 
-  linesSchema.pre("find", async function (next) {
-    await this.populate("product");
-    next();
-  });
+  // linesSchema.pre("find", async function (next) {
+  //   await this.populate("product");
+  //   next();
+  // });
 
-  linesSchema.pre("findOne", async function (next) {
-    await this.populate("product");
-    next();
-  });
+  // linesSchema.pre("findOne", async function (next) {
+  //   await this.populate("product");
+  //   next();
+  // });
 
   const ordersSchema = new Schema(
     {
@@ -40,15 +40,15 @@ if (!mongoose.models.Order){
   );
 
   
-  ordersSchema.pre("find", async function (next) {
-    await this.populate("lines.product");
-    next();
-  });
+  // ordersSchema.pre("find", async function (next) {
+  //   await this.populate("lines.product");
+  //   next();
+  // });
 
-  ordersSchema.pre("findOne", async function (next) {
-    await this.populate("lines.product");
-    next();
-  });
+  // ordersSchema.pre("findOne", async function (next) {
+  //   await this.populate("lines.product");
+  //   next();
+  // });
 
   ordersSchema.virtual("total").get(function () {
     let total = 0
