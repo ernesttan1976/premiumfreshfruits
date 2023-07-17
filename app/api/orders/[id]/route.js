@@ -9,11 +9,34 @@ export async function GET(request, {params}) {
   const id = params.id
   
   try {
-    const order = await Order.findById(id).select('date lines total gst totalwithgst').populate({
+    const order = await Order.findById(id).select('date lines total').populate({
       path: "lines.product",
       select: "name unitPrice"
     })
     console.info(order)
+    
+    return NextResponse.json(order);
+  } catch (err) {
+    console.error(err.message)
+    return new NextResponse(null, {
+      status: 500,
+      statusText: 'Internal Server Error',
+      body: "Error in GET: /api/orders/[id]" + err.message,
+    })
+
+  }
+}
+
+export async function DELETE(request, {params}) {
+
+  connect();
+  const id = params.id
+  
+  try {
+    const order = await Order.findById(id)
+    console.info(order)
+
+    if (order) order.deleteOne()
     
     return NextResponse.json(order);
   } catch (err) {

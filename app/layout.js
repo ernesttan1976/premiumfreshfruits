@@ -1,9 +1,8 @@
-"use client"
 import './globals.css'
-import { Link } from '@chakra-ui/next-js'
+import Link from 'next/link'
 
 import { Providers } from "./providers";
-import { Flex,Text } from '@chakra-ui/react'
+import { Text,Flex,Button } from './chakra/chakra'
 
 export default function RootLayout({ children }) {
   return (
@@ -14,11 +13,11 @@ export default function RootLayout({ children }) {
           <header>
             <Flex direction="column" width="100vw" height="80px" align="center" justify="space-apart">
               <Flex p={2} width="100vw" direction="row" justify='center'>
-              <Text fontSize={24} fontWeight="bold" textAlign="center">Premium Fresh Fruits POS System</Text>
+              <Text fontSize={20} p={0} fontWeight="bold" textAlign="center">Premium Fresh Fruits POS System</Text>
               </Flex>
-              <Flex p={2} width="20vw" direction="row" justify="space-around">
-                <Link href="/"  color='blue.400' _hover={{ color: 'blue.500' }}>View Cart</Link>
-                <Link href="/orders" color='blue.400' _hover={{ color: 'blue.500' }}>View Orders</Link>
+              <Flex p={2} width="20vw" height="80px" direction="row" justify="space-around">
+                <Button size="sm" px={4}><Link href="/">View Cart</Link></Button>
+                <Button size="sm" px={4}><Link href="/orders">View Orders</Link></Button>
                 </Flex>
             </Flex>
           </header>

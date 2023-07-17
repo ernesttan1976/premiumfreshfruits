@@ -43,7 +43,9 @@ if (!mongoose.models.Order) {
   ordersSchema.virtual("total").get(function () {
     let total = 0
     this.lines.forEach((line) => {
-      total += +line.product.unitPrice * +line.orderQty
+      if (line.product && line.product.unitPrice){
+        total += +line.product.unitPrice * +line.orderQty
+      }
     })
     return parseFloat(total.toFixed(2))
   })

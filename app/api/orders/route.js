@@ -12,6 +12,11 @@ export async function GET() {
       path: "lines.product",
       select: "name unitPrice"
     })
+
+    // const order = await Order.findById(id).select('date lines total').populate({
+    //   path: "lines.product",
+    //   select: "name unitPrice"
+    // })
     //console.info(orders)
     
     return NextResponse.json(orders);
@@ -44,7 +49,7 @@ export async function POST(req, res) {
       } 
       lines.push(newLine)
       productFound.stockQty -= parseInt(productIds[productId].orderQty)
-      productFound.save()
+      await productFound.save()
     }
     
     const newOrder = {
@@ -52,7 +57,7 @@ export async function POST(req, res) {
       lines: lines,
     }
     const result = await Order.create(newOrder)
-    result.save()
+    await result.save()
 
     console.info(result)
     

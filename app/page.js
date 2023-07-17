@@ -1,9 +1,10 @@
 "use client"
 import styles from './page.module.css'
 import { useState, useEffect } from "react"
-import { Spinner, Button, Flex, Text } from '@chakra-ui/react'
-import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableCaption, TableContainer } from '@chakra-ui/react'
-import { NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from '@chakra-ui/react'
+import {Spinner, Button, Flex, Text} from './chakra/chakra'
+
+import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableCaption, TableContainer } from './chakra/chakra'
+import { NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from './chakra/chakra'
 import { useRouter } from 'next/navigation'
 
 import dayjs from "dayjs"
@@ -13,7 +14,7 @@ import dayjs from "dayjs"
 //   description: 'Point of Sale Application',
 // }
 
-export default function Home() {
+export default function Home({children}) {
 
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(false)
@@ -91,20 +92,20 @@ export default function Home() {
 
   return (
     <>
-      <Flex direction="row" width="100vw" height="30px" align="center" justify="center" overflow="none">
-        <Flex direction="column" width="45vw" height="30px" align="center" justify="center">
-          <Text fontSize="lg" fontWeight="bold" textAlign="center">Product List</Text>
+      <Flex p={0} direction="row" width="100vw" align="center" justify="center" overflow="none">
+        <Flex p={0} direction="column" width="45vw" height="40px" align="center" justify="center">
+          <Text p={0} fontSize="md" fontWeight="bold" textAlign="center">Product List</Text>
         </Flex>
-        <Flex direction="column" width="35vw" height="30px" align="center" justify="center">
-          <Text fontSize="lg" fontWeight="bold" textAlign="center">Shopping Cart</Text>
+        <Flex p={0} direction="column" width="35vw" height="40px" align="center" justify="center">
+          <Text p={0} fontSize="md" fontWeight="bold" textAlign="center">Shopping Cart</Text>
         </Flex>
       </Flex>
-      <Flex direction="row" width="100vw" height="100%" align="flex-start" justify="center" overflow="none">
-        <Flex p={4} direction="column" width="45vw" height="80vh" align="center" justify="flex-start" overflowY="scroll">
+      <Flex p={0} m={0} direction="row" width="100vw" height="100%" align="flex-start" justify="center" overflow="none">
+        <Flex m={4} p={8} borderRadius="16px" boxShadow="2px 3px 10px 3px #888888" overflow="hidden">
+        <Flex direction="column" width="40vw" height="50vh" align="center" justify="flex-start" overflowY="scroll">
           {loading ? <Spinner size='xl' /> :
             <>
-              <Table className="table" variant='striped' colorScheme='teal' >
-                <TableCaption>Change the Quantity to Add Product To Cart</TableCaption>
+              <Table className="table" size="sm" variant='striped' colorScheme="whatsapp" >
                 <Thead>
                   <Tr>
                     <Th>Product Name</Th>
@@ -120,7 +121,7 @@ export default function Home() {
                       <Td>{product.stockQty}</Td>
                       <Td>${product.unitPrice.toFixed(2)}</Td>
                       <Td>
-                        <NumberInput width="100px" size='md' min={0} max={product.stockQty} default={0} onChange={(value) => handleChange(value, product._id)}>
+                        <NumberInput width="100px" size='sm' min={0} max={product.stockQty} default={0} onChange={(value) => handleChange(value, product._id)}>
                           <NumberInputField />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
@@ -135,10 +136,11 @@ export default function Home() {
             </>
           }
         </Flex>
+        </Flex>
 
-        <Flex p={4} direction="column" width="35vw" height="80vh" align="center" justify="flex-start" overflowY="scroll">
-          <Table className="table" variant='striped' colorScheme='teal' >
-            <TableCaption>Please check carefully before placing order.</TableCaption>
+        <Flex m={4} p={8} borderRadius="16px" boxShadow="2px 3px 10px 3px #888888" overflow="auto">
+        <Flex direction="column" width="35vw" height="50vh" align="center" justify="flex-start" overflowY="scroll">
+          <Table className="table" size="sm" variant='striped' colorScheme="whatsapp">
             <Thead>
               <Tr>
                 <Th textAlign="center">Product Name</Th>
@@ -164,6 +166,7 @@ export default function Home() {
               <Tr><Td colSpan={4} textAlign="center"><Button onClick={(ev) => handlePlaceOrder(ev)}>Place Order</Button></Td></Tr>
             </Tbody>
           </Table>
+          </Flex>
         </Flex>
       </Flex>
     </>
