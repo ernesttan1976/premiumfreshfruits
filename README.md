@@ -87,6 +87,30 @@ export async function POST() {
 [Use .env.local to load environment variables](https://nextjs.org/docs/app/building-your-application/configuring/environment-variables#loading-environment-variables)
 
 
+### 6.3 NextJS Caching During Fetch
+The old data tends not to be refreshed because of the cache. either set to no-cache or set to short lifetime
+
+```
+export default async function Page() {
+  // This request should be cached until manually invalidated.
+  // Similar to `getStaticProps`.
+  // `force-cache` is the default and can be omitted.
+  const staticData = await fetch(`https://...`, { cache: 'force-cache' })
+ 
+  // This request should be refetched on every request.
+  // Similar to `getServerSideProps`.
+  const dynamicData = await fetch(`https://...`, { cache: 'no-store' })
+ 
+  // This request should be cached with a lifetime of 10 seconds.
+  // Similar to `getStaticProps` with the `revalidate` option.
+  const revalidatedData = await fetch(`https://...`, {
+    next: { revalidate: 10 },
+  })
+ 
+  return <div>...</div>
+}
+```
+
 ## 7 ChakraUI Notes 
 [Docs:](https://chakra-ui.com/getting-started)
 [Next.JS for Chakra - note that this is using Pages Router!](https://chakra-ui.com/getting-started/nextjs-guide)
