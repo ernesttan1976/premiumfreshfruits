@@ -4,10 +4,13 @@ import { NextResponse } from 'next/server'
 
 export async function GET(request, response) {
 
+  revalidatePath(request.url)
+
   connect();
 
   try {
     const products = await Product.find({})
+
     //.sort({ 'createdAt': 'desc' })
     return NextResponse.json(products);
   } catch (err) {
