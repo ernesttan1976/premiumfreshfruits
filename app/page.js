@@ -23,27 +23,30 @@ export default function Home({children}) {
   const [toggleReload, setToggleReload] = useState(false)
   const router = useRouter()
 
+  const loadProducts = async () => {
+    const result = await fetch("/api/products",
+    {
+      method: 'GET',
+      cache: 'reload'
+    }
+    )
+    
+    if (result.ok) {
+      const data = await result.json()
+      setProducts(data)
+    } else {
+      
+      console.log("Error in GET: /api/products")
+    }
+    
+  }
+
   useEffect(() => {
     setLoading(true)
-    const loadProducts = async () => {
-      const result = await fetch("/api/products",
-      {
-        method: 'GET',
-        cache: 'reload'
-      }
-      )
-      
-      if (result.ok) {
-        const data = await result.json()
-        setProducts(data)
-      } else {
-        
-        console.log("Error in GET: /api/products")
-      }
-      setLoading(false)
-    }
 
     loadProducts()
+
+    setLoading(false)
 
   }, [toggleReload])
 
@@ -73,9 +76,8 @@ export default function Home({children}) {
   }
 
   function handleReload(){
-    setTimeout(() => {
-      setToggleReload(!toggleReload)
-    }, 500);
+
+    loadProducts()
     
   }
 
@@ -104,7 +106,7 @@ export default function Home({children}) {
 
         setCartItems([])
         setLoading2(false)
-        setToggleReload(!toggleReload)          
+        loadProducts()       
 
       } else {
         console.log("Error in POST: /api/orders "+JSON.stringify(result))
