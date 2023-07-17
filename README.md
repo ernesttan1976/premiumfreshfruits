@@ -111,11 +111,33 @@ export default async function Page() {
 }
 ```
 
-### 6.4 Purge Data Cache After Every Commit
-https://vercel.com/ernesttan/premiumfreshfruits/settings/data-cache
+### 6.4 Issue In Next.JS, Trying to Refetch the Mutated Data But No Change!
+This is a workaround solution to this bug.
+Make a reference to the request.url inside the API function.
+However if you have a better solution, please let me know!
+```
+export async function GET(request, response) {
 
-### 6.5 Refetching Data by using a router trick
-https://www.joshwcomeau.com/nextjs/refreshing-server-side-props/
+>  console.log("revalidating",request.url)
+    //revalidatePath(request.url)
+
+  connect();
+
+  try {
+    const products = await Product.find({})
+
+    //.sort({ 'createdAt': 'desc' })
+    return NextResponse.json(products);
+  } catch (err) {
+    return new NextResponse(null, {
+      status: 500,
+      statusText: 'Internal Server Error',
+      body: "Error in GET: /api/products :" + err.message,
+    })
+
+  }
+}
+```
 
 
 ## 7 ChakraUI Notes 
