@@ -34,7 +34,7 @@ export async function GET() {
       
       await Product.deleteMany({}).exec()
 
-      const result = await Product.create(productArray).exec()
+      const result = await Product.create(productArray)
       return NextResponse.json({ result });
     } catch (err) {
       return NextResponse.json({ message: "Error in GET: /api/products/seed" + err })
