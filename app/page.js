@@ -86,7 +86,7 @@ export default function Home({children}) {
         setCartItems([])
         setToggleReload(!toggleReload)  
       } else {
-        console.log("Error in POST: /api/orders"+result)
+        console.log("Error in POST: /api/orders "+JSON.stringify(result))
       }
 
     } catch (err) {

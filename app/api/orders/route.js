@@ -45,7 +45,7 @@ export async function POST(req, res) {
     for (const productId in productIds){
       let productFound = await Product.findById(productId)
       const newLine = {
-        product: productId,
+        product: productFound._id,
         orderQty: parseInt(productIds[productId].orderQty),
       } 
 
