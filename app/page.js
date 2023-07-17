@@ -76,7 +76,8 @@ export default function Home({children}) {
         {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Cache-Control': 'max-age=60',
           },
           body: JSON.stringify(cartItems),
         }
