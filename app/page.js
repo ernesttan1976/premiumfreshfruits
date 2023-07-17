@@ -18,6 +18,7 @@ export default function Home({children}) {
 
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(false)
+  const [loading2, setLoading2] = useState(false)
   const [cartItems, setCartItems] = useState({})
   const [toggleReload, setToggleReload] = useState(false)
   const router = useRouter()
@@ -28,14 +29,15 @@ export default function Home({children}) {
       const result = await fetch("/api/products",
       {
         method: 'GET',
-        cache: 'no-store'
+        // cache: 'no-store'
       }
       )
-      if (!result.ok) return
-      const data = await result.json()
-      if (result.ok === true) {
+      
+      if (result.ok) {
+        const data = await result.json()
         setProducts(data)
       } else {
+        
         console.log("Error in GET: /api/products")
       }
       setLoading(false)
@@ -64,17 +66,13 @@ export default function Home({children}) {
 
   };
 
-  // const handleAddToCart = async (ev) => {
-  //   ev.preventDefault()
-  //   console.log(cartItems)
-  // };
-
   function handleReload(){
     setToggleReload(!toggleReload)
   }
 
   const handlePlaceOrder = async (ev) => {
     ev.preventDefault()
+    setLoading2(true)
     //console.log(cartItems)
     try {
       const result = await fetch("/api/orders",
@@ -91,10 +89,13 @@ export default function Home({children}) {
         const data = await result.json()
         const id = data._id
   
-        setCartItems([])
-        setToggleReload(!toggleReload)  
-        router.push("/orders/"+id)
+        setTimeout(() => {
+          setCartItems([])
+          setToggleReload(!toggleReload)
+          setLoading2(false)          
+        }, 3000);
 
+        router.push("/orders/"+id)
       } else {
         console.log("Error in POST: /api/orders "+JSON.stringify(result))
       }
@@ -106,16 +107,15 @@ export default function Home({children}) {
 
   return (
     <>
-      <Flex p={0} direction="row" width="100vw" align="center" justify="center" overflow="none">
-        <Flex p={0} direction="column" width="45vw" height="40px" align="center" justify="center">
-          <Text p={0} fontSize="md" fontWeight="bold" textAlign="center">Product List</Text>
+      {/* <Flex p={0} m={0} direction="row" width="100vw" align="center" justify="center" overflow="none">
+        <Flex mx={4} px={8} direction="column" width="40vw" height="40px" align="center" justify="center">
+                  </Flex>
+        <Flex mx={4} px={8} direction="column" width="35vw" height="40px" align="center" justify="center">
         </Flex>
-        <Flex p={0} direction="column" width="35vw" height="40px" align="center" justify="center">
-          <Text p={0} fontSize="md" fontWeight="bold" textAlign="center">Shopping Cart</Text>
-        </Flex>
-      </Flex>
+      </Flex> */}
       <Flex p={0} m={0} direction="row" width="100vw" height="100%" align="flex-start" justify="center" overflow="none">
-        <Flex m={4} p={8} borderRadius="16px" boxShadow="2px 3px 10px 3px #888888" overflow="hidden">
+        <Flex m={4} p={8} direction="column" borderRadius="16px" boxShadow="2px 3px 10px 3px #888888" overflow="hidden">
+        <Text mb={8} fontSize="lg" fontWeight="bold" textAlign="center">Product List</Text>
         <Flex direction="column" width="40vw" height="50vh" align="center" justify="flex-start" overflowY="scroll">
           {loading ? <Spinner size='xl' /> :
             <>
@@ -153,7 +153,8 @@ export default function Home({children}) {
         </Flex>
         </Flex>
 
-        <Flex m={4} p={8} borderRadius="16px" boxShadow="2px 3px 10px 3px #888888" overflow="auto">
+        <Flex m={4} p={8} direction="column" borderRadius="16px" boxShadow="2px 3px 10px 3px #888888" overflow="auto">
+        <Text mb={8} fontSize="lg" fontWeight="bold" textAlign="center">Shopping Cart</Text>
         <Flex direction="column" width="35vw" height="50vh" align="center" justify="flex-start" overflowY="scroll">
           <Table className="table" size="sm" variant='striped' colorScheme="whatsapp">
             <Thead>
@@ -178,7 +179,7 @@ export default function Home({children}) {
                 <Tr><Td colSpan={4} textAlign="center">Cart is empty</Td></Tr>
               }
               <Tr><Td colSpan={2}></Td><Td colSpan={1} textAlign="center">Total</Td><Td colSpan={1} textAlign="right">${Object.keys(cartItems).reduce((acc, id) => (acc + cartItems[id].unitPrice * cartItems[id].orderQty), 0).toFixed(2)}</Td></Tr>
-              <Tr><Td colSpan={4} textAlign="center"><Button onClick={(ev) => handlePlaceOrder(ev)}>Place Order</Button></Td></Tr>
+              <Tr><Td colSpan={4} textAlign="center"><Button onClick={(ev) => handlePlaceOrder(ev)}> Place Order {loading2 && <Spinner size='sm' />}</Button></Td></Tr>
             </Tbody>
           </Table>
           </Flex>

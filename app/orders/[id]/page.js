@@ -19,7 +19,7 @@ export default function OrderShow({ params }) {
       const result = await fetch("/api/orders/" + id,
         {
           method: "GET",
-          cache: 'no-store'
+          // cache: 'no-store'
         }
       )
       //console.log(data)
@@ -38,13 +38,9 @@ export default function OrderShow({ params }) {
 
   return (
     <>
-      <Flex direction="row" width="100vw" height="50px" align="center" justify="center" overflow="none">
-        <Flex direction="column" width="60vw" height="50px" align="center" justify="center">
-          <Text fontSize="md" fontWeight="bold" textAlign="center">Order Detail</Text>
-        </Flex>
-      </Flex>
       <Flex m={0} p={0} direction="row" width="80vw" height="100%" align="flex-start" justify="center" overflow="none">
-        <Flex m={0} p={6} borderRadius="16px" boxShadow="2px 3px 10px 3px #888888" overflow="hidden">
+        <Flex m={8} p={6} direction="column" borderRadius="16px" boxShadow="2px 3px 10px 3px #888888" overflow="hidden">
+        <Text mb={8} fontSize="lg" fontWeight="bold" textAlign="center">Order Detail</Text>
         <Flex direction="column" width="50vw" height="55vh" align="center" justify="flex-start" overflowY="scroll">
           {loading ? <Spinner size='xl' /> :
             <>

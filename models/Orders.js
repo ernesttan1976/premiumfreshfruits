@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
-import Product from "./Products"
 
-if (!mongoose.models.Order) {
+if (!mongoose.models.Order){
 
   const linesSchema = new Schema(
     {
@@ -14,15 +13,15 @@ if (!mongoose.models.Order) {
     },
   )
 
-  // linesSchema.pre("find", function (next) {
-  //   this.populate("product");
-  //   next();
-  // });
+  linesSchema.pre("find", function (next) {
+    this.populate("product");
+    next();
+  });
 
-  // linesSchema.pre("findOne", function (next) {
-  //   this.populate("product");
-  //   next();
-  // });
+  linesSchema.pre("findOne", function (next) {
+    this.populate("product");
+    next();
+  });
 
   const ordersSchema = new Schema(
     {
@@ -50,13 +49,11 @@ if (!mongoose.models.Order) {
     return parseFloat(total.toFixed(2))
   })
 
+  mongoose.model('Order', ordersSchema)
 
-
-  mongoose.model("Order", ordersSchema);
 }
 
-export default mongoose.models.Order;
-
+export default mongoose.models.Order
 
 
 

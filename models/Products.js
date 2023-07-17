@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-if (!mongoose.models.Product) {
-
+if (!mongoose.models.Product){
   const productsSchema = new Schema(
     {
       name: String,
@@ -28,10 +27,10 @@ if (!mongoose.models.Product) {
     }
   );
 
-  mongoose.model("Product", productsSchema);
+mongoose.model('Product', productsSchema)
+  
 }
-
-export default mongoose.models.Product;
+export default mongoose.models.Product
 
 
 
