@@ -111,6 +111,9 @@ export default async function Page() {
 }
 ```
 
+### 6.4 Purge Data Cache After Every Commit
+https://vercel.com/ernesttan/premiumfreshfruits/settings/data-cache
+
 ## 7 ChakraUI Notes 
 [Docs:](https://chakra-ui.com/getting-started)
 [Next.JS for Chakra - note that this is using Pages Router!](https://chakra-ui.com/getting-started/nextjs-guide)

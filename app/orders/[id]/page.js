@@ -19,7 +19,7 @@ export default function OrderShow({ params }) {
       const result = await fetch("/api/orders/" + id,
         {
           method: "GET",
-          // cache: 'no-store'
+          cache: 'no-store'
         }
       )
       //console.log(data)
