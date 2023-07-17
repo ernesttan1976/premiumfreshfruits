@@ -46,7 +46,7 @@ export async function POST(req, res) {
       lines.push(newLine)
 
       //subtract order qty from the stock qty from each product
-      let productFound = await Product.findById(productId)
+      let productFound = await Product.findById(productId).exec()
 
       if (productFound) {
       productFound.stockQty -= parseInt(productIds[productId].orderQty)
@@ -62,7 +62,7 @@ export async function POST(req, res) {
     }
 
     console.info("newOrder:",newOrder)
-    const result = await Order.create(newOrder)
+    const result = await Order.create(newOrder).exec()
     console.info("result:",result)
     await result.save()
 
@@ -74,7 +74,7 @@ export async function POST(req, res) {
     return new NextResponse(null, {
       status: 500,
       statusText: 'Internal Server Error',
-      body: "Error in POST: /api/orders" + err.message,
+      body: "Error in POST: /api/orders" + err.message +err.stack,
     })
 
   }
