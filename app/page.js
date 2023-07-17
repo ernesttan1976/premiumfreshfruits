@@ -78,12 +78,16 @@ export default function Home({children}) {
         }
       )
       
-      const data = await result.json()
-      const id = data._id
-      router.push("/orders/"+id)
-
-      setCartItems([])
-      setToggleReload(!toggleReload)
+      if (result.ok) {
+        const data = await result.json()
+        const id = data._id
+        router.push("/orders/"+id)
+  
+        setCartItems([])
+        setToggleReload(!toggleReload)  
+      } else {
+        console.log("Error in POST: /api/orders"+result)
+      }
 
     } catch (err) {
       console.log(err)

@@ -37,17 +37,18 @@ export async function POST(req, res) {
   connect();
 
   const productIds = await req.json()
-  console.info(productIds)
+  console.info("POST received productIds:",productIds)
 
   try {
     let lines=[]
 
     for (const productId in productIds){
-      const productFound = await Product.findById(productId)
+      let productFound = await Product.findById(productId)
       const newLine = {
-        product: productFound,
+        product: productId,
         orderQty: parseInt(productIds[productId].orderQty),
       } 
+
       lines.push(newLine)
       productFound.stockQty -= parseInt(productIds[productId].orderQty)
       await productFound.save()
@@ -57,17 +58,21 @@ export async function POST(req, res) {
       date: new Date(),
       lines: lines,
     }
+
+    console.info("newOrder:",newOrder)
     const result = await Order.create(newOrder)
+    console.info("result:",result)
     await result.save()
 
-    console.info(result)
+
     
     return NextResponse.json(result);
   } catch (err) {
+    console.info(err.message)
     return new NextResponse(null, {
       status: 500,
       statusText: 'Internal Server Error',
-      body: "Error in POST: /api/orders" + err,
+      body: "Error in POST: /api/orders" + err.message,
     })
 
   }
