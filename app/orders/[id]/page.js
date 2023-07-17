@@ -57,7 +57,7 @@ export default function OrderShow({ params }) {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {order &&
+                  {order?.lines?.length>0 &&
                     <>
                       {order?.lines?.map((line, index) => {
                         return <Tr>

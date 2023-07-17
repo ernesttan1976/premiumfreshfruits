@@ -13,13 +13,13 @@ if (!mongoose.models.Order){
     },
   )
 
-  linesSchema.pre("find", function (next) {
-    this.populate("product");
+  linesSchema.pre("find", async function (next) {
+    await this.populate("product");
     next();
   });
 
-  linesSchema.pre("findOne", function (next) {
-    this.populate("product");
+  linesSchema.pre("findOne", async function (next) {
+    await this.populate("product");
     next();
   });
 
@@ -40,13 +40,13 @@ if (!mongoose.models.Order){
   );
 
   
-  ordersSchema.pre("find", function (next) {
-    this.populate("lines.product");
+  ordersSchema.pre("find", async function (next) {
+    await this.populate("lines.product");
     next();
   });
 
-  ordersSchema.pre("findOne", function (next) {
-    this.populate("lines.product");
+  ordersSchema.pre("findOne", async function (next) {
+    await this.populate("lines.product");
     next();
   });
 
