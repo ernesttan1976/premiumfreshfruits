@@ -32,7 +32,7 @@ export async function GET() {
 
     try {
       
-      await Product.deleteMany({}).exec()
+      await Product.deleteMany({})
 
       const result = await Product.create(productArray)
       return NextResponse.json({ result });
