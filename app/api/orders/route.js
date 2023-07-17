@@ -8,10 +8,11 @@ export async function GET() {
   connect();
 
   try {
-    const orders = await Order.find({}).select('date lines total').sort("-date").populate({
+    const orders = await Order.find({}).populate({
       path: "lines.product",
       select: "name unitPrice"
-    })
+    }).select('date lines total').sort("-date")
+    
 
     // const order = await Order.findById(id).select('date lines total').populate({
     //   path: "lines.product",
