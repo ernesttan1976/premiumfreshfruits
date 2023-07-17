@@ -29,7 +29,7 @@ export default function Home({children}) {
       const result = await fetch("/api/products",
       {
         method: 'GET',
-        cache: 'no-store'
+        cache: 'reload'
       }
       )
       
