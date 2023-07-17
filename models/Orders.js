@@ -13,15 +13,15 @@ if (!mongoose.models.Order){
     },
   )
 
-  linesSchema.pre("find", function (next) {
-    this.populate("product");
-    next();
-  });
+  // linesSchema.pre("find", function (next) {
+  //   this.populate("product");
+  //   next();
+  // });
 
-  linesSchema.pre("findOne", function (next) {
-    this.populate("product");
-    next();
-  });
+  // linesSchema.pre("findOne", function (next) {
+  //   this.populate("product");
+  //   next();
+  // });
 
   const ordersSchema = new Schema(
     {
