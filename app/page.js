@@ -66,6 +66,12 @@ export default function Home({children}) {
 
   };
 
+  // Call this function whenever you want to
+  // refresh props!
+  const refreshData = () => {
+    router.replace(router.asPath);
+  }
+
   function handleReload(){
     setToggleReload(!toggleReload)
   }
@@ -94,8 +100,8 @@ export default function Home({children}) {
         }, 3000);
 
         setCartItems([])
-        setToggleReload(!toggleReload)
-        setLoading2(false)          
+        setLoading2(false)
+        refreshData()          
 
       } else {
         console.log("Error in POST: /api/orders "+JSON.stringify(result))
