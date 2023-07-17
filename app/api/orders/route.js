@@ -46,7 +46,7 @@ export async function POST(req, res) {
       lines.push(newLine)
 
       //subtract order qty from the stock qty from each product
-      let productFound = await Product.findById(productId).exec()
+      let productFound = await Product.findById(productId)
 
       if (productFound) {
       productFound.stockQty -= parseInt(productIds[productId].orderQty)
