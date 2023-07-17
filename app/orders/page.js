@@ -20,7 +20,7 @@ export default function Orders() {
       const result = await fetch("/api/orders",
         {
           method: "GET",
-          next: { revalidate: 10 }
+          cache: 'no-store'
         }
       )
 

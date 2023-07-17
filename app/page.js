@@ -28,7 +28,7 @@ export default function Home({children}) {
       const result = await fetch("/api/products",
       {
         method: 'GET',
-        next: { revalidate: 10 }
+        cache: 'no-store'
       }
       )
       if (!result.ok) return
