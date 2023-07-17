@@ -12,7 +12,7 @@ export async function GET(request, {params}) {
     const order = await Order.findById(id).select('date lines total').populate({
       path: "lines.product",
       select: "name unitPrice"
-    })
+    }).exec()
     console.info(order)
     
     return NextResponse.json(order);

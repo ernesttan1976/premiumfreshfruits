@@ -11,14 +11,9 @@ export async function GET() {
     const orders = await Order.find({}).populate({
       path: "lines.product",
       select: "name unitPrice"
-    }).select('date lines total').sort("-date")
-    
+    }).select('date lines total').sort("-date").exec()
 
-    // const order = await Order.findById(id).select('date lines total').populate({
-    //   path: "lines.product",
-    //   select: "name unitPrice"
-    // })
-    //console.info(orders)
+    console.info(orders)
     
     return NextResponse.json(orders);
   } catch (err) {
