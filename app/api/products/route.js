@@ -4,7 +4,8 @@ import { NextResponse } from 'next/server'
 
 export async function GET(request, response) {
 
-  revalidatePath(request.url)
+  console.log("revalidating",request.url)
+    //revalidatePath(request.url)
 
   connect();
 
