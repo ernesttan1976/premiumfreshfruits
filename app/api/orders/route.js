@@ -11,7 +11,7 @@ export async function GET() {
     const orders = await Order.find({}).populate({
       path: "lines.product",
       select: "name unitPrice"
-    }).select('date lines total').sort("-date").exec()
+    }).select('date lines total').sort("-date")
 
     console.info(orders)
     
