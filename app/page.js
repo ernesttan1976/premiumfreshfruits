@@ -90,12 +90,13 @@ export default function Home({children}) {
         const id = data._id
   
         setTimeout(() => {
-          setCartItems([])
-          setToggleReload(!toggleReload)
-          setLoading2(false)          
+          router.push("/orders/"+id)
         }, 3000);
 
-        router.push("/orders/"+id)
+        setCartItems([])
+        setToggleReload(!toggleReload)
+        setLoading2(false)          
+
       } else {
         console.log("Error in POST: /api/orders "+JSON.stringify(result))
       }
