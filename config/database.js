@@ -11,7 +11,8 @@ let connectionTimeout;
 const DATABASE_URL = process.env.DATABASE_URL
 
 const connect = () => {
-  mongoose.set('bufferCommands', false);
+
+  mongoose.set('bufferTimeoutMS', 500);
 
   mongoose.connect(DATABASE_URL, {
     useNewUrlParser: true,

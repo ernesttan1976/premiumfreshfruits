@@ -32,10 +32,10 @@ export async function GET() {
 
     try {
       
-      await Product.deleteMany({})
+      await Product.deleteMany({}).exec()
 
       const result = await Product.create(productArray)
-      await Product.save()
+
       return NextResponse.json({ result });
     } catch (err) {
       return NextResponse.json({ message: "Error in GET: /api/products/seed" + err })
