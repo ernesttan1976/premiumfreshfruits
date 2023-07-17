@@ -25,7 +25,14 @@ export default function Home({children}) {
   useEffect(() => {
     setLoading(true)
     const loadProducts = async () => {
-      const result = await fetch("/api/products")
+      const result = await fetch("/api/products",
+      {
+        method: 'GET',
+        headers: {
+          'Cache-Control': 'max-age=60',
+        },
+      }
+      )
       if (!result.ok) return
       const data = await result.json()
       if (result.ok === true) {
