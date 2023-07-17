@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 import Product from "./Products"
 
-// if (!mongoose.models.Order) {
+if (!mongoose.models.Order) {
 
   const linesSchema = new Schema(
     {
@@ -53,7 +53,7 @@ import Product from "./Products"
 
 
   mongoose.model("Order", ordersSchema);
-// }
+}
 
 export default mongoose.models.Order;
 

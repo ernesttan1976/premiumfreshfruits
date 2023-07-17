@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-// if (!mongoose.models.Product) {
+if (!mongoose.models.Product) {
 
   const productsSchema = new Schema(
     {
@@ -25,7 +25,7 @@ const { Schema } = mongoose;
   );
 
   mongoose.model("Product", productsSchema);
-// }
+}
 
 export default mongoose.models.Product;
 

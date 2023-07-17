@@ -1,4 +1,4 @@
-import mongoose, { ConnectOptions } from "mongoose";
+import mongoose from "mongoose";
 // import getConfig from 'next/config';
 
 // const { serverRuntimeConfig } = getConfig();
@@ -29,8 +29,14 @@ const connect = () => {
       connectionTimeout = setTimeout(() => {
         disconnect();
       }, 5 * 60 * 1000); // 5 minutes in milliseconds
-  
     }
+
+    if (process.env.NODE_ENV !== 'development') {
+      connectionTimeout = setTimeout(() => {
+        disconnect();
+      }, 5 * 60 * 1000); // 5 minutes in milliseconds
+    }
+
   });
 
   mongoose.connection.on("disconnected", () =>
