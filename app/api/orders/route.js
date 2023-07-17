@@ -38,15 +38,22 @@ export async function POST(req, res) {
     let lines=[]
 
     for (const productId in productIds){
-      let productFound = await Product.findById(productId)
       const newLine = {
         product: productId,
         orderQty: parseInt(productIds[productId].orderQty),
       }  
 
       lines.push(newLine)
+
+      //subtract order qty from the stock qty from each product
+      let productFound = await Product.findById(productId)
+
+      if (productFound) {
       productFound.stockQty -= parseInt(productIds[productId].orderQty)
       await productFound.save()
+      } else {
+        console.info("Product not found: ", productId)
+      }
     }
     
     const newOrder = {
