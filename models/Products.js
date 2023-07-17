@@ -12,8 +12,12 @@ if (!mongoose.models.Product) {
       },
       unitPrice: {
         type: Number,
-        get: (v) => parseFloat(v).toFixed(2),
-        set: (v) => parseFloat(v).toFixed(2)
+        get: function (v){
+          return parseFloat(v).toFixed(2)
+        },
+        set: function (v){
+          return parseFloat(v).toFixed(2)
+        }
       },
     },
     {
