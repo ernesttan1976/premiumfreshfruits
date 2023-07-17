@@ -28,9 +28,7 @@ export default function Home({children}) {
       const result = await fetch("/api/products",
       {
         method: 'GET',
-        headers: {
-          'Cache-Control': 'max-age=60',
-        },
+        next: { revalidate: 10 }
       }
       )
       if (!result.ok) return
@@ -84,7 +82,6 @@ export default function Home({children}) {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Cache-Control': 'max-age=60',
           },
           body: JSON.stringify(cartItems),
         }

@@ -20,10 +20,7 @@ export default function Orders() {
       const result = await fetch("/api/orders",
         {
           method: "GET",
-          headers: {
-            'Cache-Control': 'max-age=60',
-          },
-
+          next: { revalidate: 10 }
         }
       )
 

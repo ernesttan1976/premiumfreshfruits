@@ -19,9 +19,7 @@ export default function OrderShow({ params }) {
       const result = await fetch("/api/orders/" + id,
         {
           method: "GET",
-          headers: {
-            'Cache-Control': 'max-age=60',
-          },
+          next: { revalidate: 10 }
         }
       )
       //console.log(data)
