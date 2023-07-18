@@ -54,6 +54,7 @@ export default function OrderShow({ params }) {
                     <Th colSpan={2}>Item</Th>
                     <Th>Order Qty</Th>
                     <Th>Unit Price</Th>
+                    <Th>Sub Total</Th>
                   </Tr>
                 </Thead>
                 <Tbody>
@@ -64,6 +65,7 @@ export default function OrderShow({ params }) {
                           <Td colSpan={2} textAlign="left">{line.product.name} </Td>
                           <Td>{line.orderQty}</Td>
                           <Td>${line.product.unitPrice.toFixed(2)}</Td>
+                          <Td>${(line.product.unitPrice*line.orderQty).toFixed(2)}</Td>
                         </Tr>
                       })}
                     </>
@@ -71,16 +73,16 @@ export default function OrderShow({ params }) {
                 </Tbody>
                 <Tfoot>
                   <Tr>
-                    <Td colSpan={3} textAlign="right">Total</Td>
+                    <Td colSpan={4} textAlign="right">Net Total</Td>
                     <Td>${order.total?.toFixed(2)}</Td>
                   </Tr>
                   <Tr>
-                    <Td colSpan={3} textAlign="right">GST</Td>
+                    <Td colSpan={4} textAlign="right">GST</Td>
                     <Td>${(order.total * 0.08).toFixed(2)}</Td>
                   </Tr>
                   <Tr>
-                    <Td colSpan={3} textAlign="right">Total with GST</Td>
-                    <Td colSpan={2}>${(order.total * 1.08).toFixed(2)}</Td>
+                    <Td colSpan={4} textAlign="right">Total with GST</Td>
+                    <Td colSpan={3}>${(order.total * 1.08).toFixed(2)}</Td>
                   </Tr>
                 </Tfoot>
               </Table>
