@@ -23,7 +23,7 @@ As a cashier, I can
 - Next.JS is configured with App router i.e. layout.js, page.js, route.js,
   and Javascript, no automated testing, to keep it simple
 - Mongoose ODM / Mongodb Database
-- Chakra UI or Ant Design UI
+- Chakra UI or ~~Ant Design UI~~
 - Deployment to Vercel
 
 ## 5. Models
@@ -92,27 +92,27 @@ The old data tends not to be refreshed because of the cache. either set to no-ca
 
 ```
 export default async function Page() {
-  // This request should be cached until manually invalidated.
+ ~~~ // This request should be cached until manually invalidated.
   // Similar to `getStaticProps`.
   // `force-cache` is the default and can be omitted.
-  const staticData = await fetch(`https://...`, { cache: 'force-cache' })
+  const staticData = await fetch(`https://...`, { cache: 'force-cache' })~~~
  
   // This request should be refetched on every request.
   // Similar to `getServerSideProps`.
-  const dynamicData = await fetch(`https://...`, { cache: 'no-store' })
- 
-  // This request should be cached with a lifetime of 10 seconds.
+>  const dynamicData = await fetch(`https://...`, { cache: 'no-store' })
+ #### using this setting! 
+~~~  // This request should be cached with a lifetime of 10 seconds.
   // Similar to `getStaticProps` with the `revalidate` option.
   const revalidatedData = await fetch(`https://...`, {
     next: { revalidate: 10 },
-  })
+  })~~~
  
   return <div>...</div>
 }
 ```
 
 ### 6.4 Issue In Next.JS, Trying to Refetch the Mutated Data But No Change!
-This is a workaround solution to this bug.
+This is a workaround solution to this issue.
 Make a reference to the request.url inside the API function.
 However if you have a better solution, please let me know!
 ```
